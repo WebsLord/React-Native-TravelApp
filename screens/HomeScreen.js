@@ -24,5 +24,5 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   title: { fontSize: 24, marginBottom: 20 },
-  buttonContainer: { marginVertical: 10 } // Butonlar arası boşluk için
+  buttonContainer: { marginVertical: 10 } // Butonlar arası boşluk için // For space between buttons
 });

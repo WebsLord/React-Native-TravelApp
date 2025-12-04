@@ -1,8 +1,8 @@
-// screens/DetailsScreen.js (Güncellenmiş hali)
+// screens/DetailsScreen.js (Güncellenmiş hali) // screens/DetailsScreen.js (Updated version)
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 export default function DetailsScreen({ route, navigation }) {
-  // Parametreleri parçala (Destructuring)
+  // Parametreleri parçala (Destructuring) // Destructuring the parameters
   const { place, rating } = route.params;
 
   return (

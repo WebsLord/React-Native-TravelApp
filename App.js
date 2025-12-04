@@ -1,7 +1,8 @@
-// App.js
+// App.js (Bölüm 5 Final Hali)
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; // Yeni import
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons'; // İkon kütüphanesi
 
 import HomeScreen from './screens/HomeScreen';
 import DetailsScreen from './screens/DetailsScreen';
@@ -10,22 +11,43 @@ import SettingsScreen from './screens/SettingsScreen';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// 1. Stack Navigator'ı ayrı bir bileşene taşıdık
 function HomeStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: 'tomato' }, // Header arka plan rengi
+        headerTintColor: '#fff', // Header yazı rengi
+        headerTitleStyle: { fontWeight: 'bold' },
+      }}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Travel Guide' }} />
       <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
   );
 }
 
-// 2. Ana App bileşeni artık Tab Navigator kullanıyor
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{ headerShown: false }}> 
-        {/* headerShown: false -> Çift header oluşmasını engeller */}
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Explore') {
+              iconName = focused ? 'map' : 'map-outline';
+            } else if (route.name === 'Settings') {
+              iconName = focused ? 'settings' : 'settings-outline';
+            }
+
+            // İkonu döndür
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: 'tomato', // Aktif sekme rengi
+          tabBarInactiveTintColor: 'gray', // Pasif sekme rengi
+        })}
+      >
         <Tab.Screen name="Explore" component={HomeStack} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
